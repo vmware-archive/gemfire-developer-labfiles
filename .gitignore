@@ -19,11 +19,11 @@ Thumbs.db
 *.log
 
 target
-pivotal-gemfire-9.2.2
+pivotal-gemfire-9.*
 stash/
 
-lab/**/locator
-lab/**/server[1-9]
+lab-projects/**/locator
+lab-projects/**/server[1-9]
 
 docs/questions/output/questions-1_0.txt
 
