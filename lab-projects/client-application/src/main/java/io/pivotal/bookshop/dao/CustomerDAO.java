@@ -51,6 +51,17 @@ public class CustomerDAO extends DAOCommon<Integer, Customer> {
 
 	}
 
-	
+	/**
+	 * Constructs an equi-join query string that returns Customers where the associated BookOrder has a
+	 * totalPrice > $45.00. This is a demo query that is designed to fail due to the fact that both regions
+	 * are partitioned regions.
+	 * 
+	 * @return List of Customer entries having associated BookOrder > $45.00
+	 */
+	public List<Customer> findHighPricedCustomerOrders() {
+		String queryString1 = "select distinct c " + "from /Customer c, /BookOrder o "
+				+ "where c.customerNumber = o.customerNumber and  o.totalPrice > 45.00";
+		return ((SelectResults<Customer>) doQuery(queryString1)).asList();
+	}	
 
 }
