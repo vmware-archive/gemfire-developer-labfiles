@@ -37,6 +37,8 @@ public class BookMasterDAOTests {
 		this.clientCache = GemFireClientCacheHelper.create();
 		clientCache.setCopyOnRead(true);
 		books = clientCache.getRegion("BookMaster");
+		books.removeAll(books.keySetOnServer());
+		populateBooks();
 		ClientRegionFactory<Integer, InventoryItem> inventoryRegionFactory = clientCache.createClientRegionFactory(ClientRegionShortcut.PROXY);
 		inventory = inventoryRegionFactory.create("InventoryItem");
 		inventory.removeAll(inventory.keySetOnServer());
