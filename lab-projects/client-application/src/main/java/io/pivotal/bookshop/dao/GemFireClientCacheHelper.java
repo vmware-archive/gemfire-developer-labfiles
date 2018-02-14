@@ -17,7 +17,6 @@ public class GemFireClientCacheHelper {
 	 * @return
 	 */
 	public static ClientCache create() {
-		// TODO-01: Create a Client Cache and configure it with a pool definition
 		ClientCache cache = new ClientCacheFactory()
           .set("name", "Client App")
           .addPoolLocator("localhost",10334)
@@ -35,7 +34,6 @@ public class GemFireClientCacheHelper {
 	 * @param cache
 	 */
 	private static void createBookMasterClientRegion(ClientCache cache) {
-        // TODO-02: Use the client cache ClientRegionFactory to create a CACHING_PROXY region for the BookMaster region
 		ClientRegionFactory<Integer, BookMaster> booksRegionFactory = cache.createClientRegionFactory(ClientRegionShortcut.CACHING_PROXY);
 		booksRegionFactory.create("BookMaster");
 
@@ -48,7 +46,6 @@ public class GemFireClientCacheHelper {
 	 * @param cache
 	 */
 	public static void createCustomerClientRegion(ClientCache cache) {
-        // TODO-03: Use the client cache ClientRegionFactory to create a CACHING_PROXY region for the Customer region
 		ClientRegionFactory<Integer, Customer> customerRegionFactory = cache.createClientRegionFactory(ClientRegionShortcut.CACHING_PROXY);
 		customerRegionFactory.create("Customer");
 		
