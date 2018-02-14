@@ -26,8 +26,8 @@ public class CustomerDAO extends DAOCommon<Integer, Customer> {
 	public List<Customer> getAll() {
 		// TODO-02: Implement the getAll method by by 1) creating the query string and 2) return the results of calling doQuery but convert
 		// to a java.util.List
-		String queryString1 = "";
-		return null;
+		String queryString1 = "SELECT * FROM /Customer";
+		return ((SelectResults<Customer>) doQuery(queryString1)).asList();
 	}
 
 	/**
@@ -40,7 +40,12 @@ public class CustomerDAO extends DAOCommon<Integer, Customer> {
 
 		// TODO-04: implement the method to select only the customerNumber, firstName and lastName as a projection list, process
 		// the results and return as a list of Customer
-		String queryString1 = "";
+		String queryString1 = "SELECT c.customerNumber, c.firstName, c.lastName FROM /Customer c ";
+		for (Struct s : (SelectResults<Struct>) doQuery(queryString1)) {
+			Customer c = new Customer((Integer) s.get("customerNumber"), (String) s.get("firstName"),
+					(String) s.get("lastName"));
+			custList.add(c);
+		}
 		
 		return custList;
 
