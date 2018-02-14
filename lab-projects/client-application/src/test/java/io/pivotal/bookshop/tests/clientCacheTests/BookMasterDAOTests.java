@@ -29,6 +29,7 @@ public class BookMasterDAOTests {
 	@Before
 	public void setUp() throws Exception {
 		this.clientCache = GemFireClientCacheHelper.create();
+		this.clientCache.setCopyOnRead(true);
 		books = clientCache.getRegion("BookMaster");
 		
 	}
@@ -99,7 +100,6 @@ public class BookMasterDAOTests {
 	 * @param book Book expected to match entry with given key
 	 */
 	private void verify(Integer key, BookMaster book) {
-		clientCache.setCopyOnRead(true);
 		BookMaster storedBook = books.get(key);
 		assertNotNull("Failed to fetch book for key: " + key, storedBook);
 		assertEquals("Stored book does not match original book", book, storedBook);
