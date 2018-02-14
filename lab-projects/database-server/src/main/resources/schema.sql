@@ -1,0 +1,12 @@
+DROP SCHEMA IF EXISTS BOOKSHOP ;
+
+CREATE SCHEMA BOOKSHOP;
+CREATE TABLE IF NOT EXISTS BOOKSHOP.BOOKS ( 
+   item_number INT IDENTITY PRIMARY KEY, 
+   title VARCHAR(50) NOT NULL,
+   author VARCHAR(20) NOT NULL, 
+   description VARCHAR(50), 
+   retail_cost FLOAT NOT NULL,
+   publication_date INT
+);
+
