@@ -11,7 +11,6 @@ import org.apache.logging.log4j.Logger;
 import io.pivotal.bookshop.domain.BookMaster;
 
 public class BookMasterWriteBehind implements AsyncEventListener {
-	// TODO-01a: Configure a Log4J logger as a class level private field
 	private final static Logger logger = LogService.getLogger(BookMasterWriteBehind.class.getName());
 	
 	@Override
@@ -20,13 +19,8 @@ public class BookMasterWriteBehind implements AsyncEventListener {
 	@Override
 	public boolean processEvents(List<AsyncEvent> events) {
 		JdbcBookDAO dao = new JdbcBookDAO();
-        // TODO-01b: Log a message regarding what's happening
 		logger.info("In BookMasterWriteBehind.processEvents()");
 		
-		// TODO-02: Implement processEvents utilizing the JdbcBookDAO to help
-		// with persisting data to a DB. Be sure to utilize the operation type to 
-		// determine the correct action to take with the database. Be sure to return a
-		// boolean indicator of success
 		boolean result = true;
 		for (AsyncEvent<Integer, BookMaster> event : events) {
 			BookMaster book = event.getDeserializedValue();
