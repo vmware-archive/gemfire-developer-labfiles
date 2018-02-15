@@ -20,12 +20,15 @@ public class TransactionalService {
 		bookOrderDao = new BookOrderDAO(cache);
 
 		// TODO-02: Initialize the reference to the CacheTransactionManager
-		
+		tx = cache.getCacheTransactionManager();
+
 	}
 
 	public void addOrder(OrderKey key, BookOrder order) {
 		// TODO-03: Wrap the operations below in a transaction, use a try/catch
 		// block to segment the success and failure paths. Ensure the transaction commits on the success path
+		try {
+			tx.begin();
 
 			Customer cust = customerDao.doGet(order.getCustomerNumber());
 			cust.addOrder(order.getOrderNumber());
@@ -33,10 +36,15 @@ public class TransactionalService {
 			customerDao.doUpdate(key.getCustomerNumber(), cust);
 			bookOrderDao.doInsert(key, order);
 
+			tx.commit();
+		}
 			
 		// TODO-04: In catching the exception, ensure that the transaction is
 		// rolled back and the exception is re-thrown
-
+		catch (Exception e) {
+			tx.rollback();
+			throw e;
+		}
 	}
 
 }
