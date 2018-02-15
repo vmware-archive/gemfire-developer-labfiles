@@ -84,7 +84,14 @@ public class CustomerDAO extends DAOCommon<Integer, Customer> {
 		Object customerEntry = this.doGet(key);
 		// TODO-09: Write necessary code to test to see if the customerEntry is
 		// a PDX instance, extract first name and last name and create a string concatenation as specified.
-		
+		if (customerEntry instanceof PdxInstance) {
+			StringBuilder name = new StringBuilder();
+			PdxInstance pdxCustomer = (PdxInstance) customerEntry;
+			name.append(pdxCustomer.getField("lastName"));
+			name.append(", ");
+			name.append(pdxCustomer.getField("firstName"));
+			customerName = name.toString();
+		}
 		
 		return customerName;
 	}
