@@ -24,12 +24,23 @@ import io.pivotal.bookshop.domain.BookMaster;
  *
  */
 public class ValidatingCacheWriter extends CacheWriterAdapter<Integer, BookMaster>  {
+	private static final Logger logger = LogService.getLogger();
 
 	@Override
 	public void beforeCreate(EntryEvent<Integer, BookMaster> event) throws CacheWriterException {
 		// TODO-02: Write the necessary code to extract the BookMaster value and the BookMaster region
 		// use these to determine you have a valid value by calling validateValue(). Based on the result,
 		// either allow or prevent the update for occurring
+		BookMaster b = event.getNewValue();
+		Region<Integer, BookMaster> books = event.getRegion();
+		logger.info("Validating value: {} for region: {}",b,books.getFullPath());
+		try {
+			if (! validateNewValue(b, books)) {
+				throw new CacheWriterException("Entry with itemNumber = " + b.getItemNumber() + " can't already exist");
+			}
+		} catch (QueryException e) {
+			throw new CacheWriterException("Failed to execute query: " + e);
+		}
 		
 	}
 
