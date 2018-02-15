@@ -109,7 +109,6 @@ public class CustomerDAOTests {
 	}
 
 	@Test
-	// TODO-03: Run this test to verify the correct implementation of the 'getAll()' method
 	public void testGetAll() {
 		CustomerDAO dao = new CustomerDAO(clientCache);
 		List<Customer> results = dao.getAll();
@@ -127,7 +126,6 @@ public class CustomerDAOTests {
 	}
 	
 	@Test 
-	// TODO-05: Run this test to verify the correct implementation of the 'getAllSummary()'
 	public void testSummaryGetAll() {
 		CustomerDAO dao = new CustomerDAO(clientCache);
 		List<Customer> results = dao.getAllSummary();

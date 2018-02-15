@@ -23,8 +23,6 @@ public class BookMasterDAO extends DAOCommon<Integer, BookMaster> {
 	 * @return List of BookMaster having quantityInStock < 2
 	 */
 	public List<BookMaster> findLowQuantityBooks() {
-		// TODO-06: Implement a join query to only select books from BookMaster
-		// where the associated InventoryItem quantityInStock is below 2
 		String queryString1 = "select  b " + "from /BookMaster b, /InventoryItem i "
 				+ "where b.itemNumber = i.itemNumber and  i.quantityInStock < 2";
 		return ((SelectResults<BookMaster>) doQuery(queryString1)).asList();
