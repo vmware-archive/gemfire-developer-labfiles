@@ -28,9 +28,6 @@ public class ValidatingCacheWriter extends CacheWriterAdapter<Integer, BookMaste
 
 	@Override
 	public void beforeCreate(EntryEvent<Integer, BookMaster> event) throws CacheWriterException {
-		// TODO-02: Write the necessary code to extract the BookMaster value and the BookMaster region
-		// use these to determine you have a valid value by calling validateValue(). Based on the result,
-		// either allow or prevent the update for occurring
 		BookMaster b = event.getNewValue();
 		Region<Integer, BookMaster> books = event.getRegion();
 		logger.info("Validating value: {} for region: {}",b,books.getFullPath());
