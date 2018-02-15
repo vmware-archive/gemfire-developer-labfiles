@@ -6,7 +6,6 @@ import io.pivotal.bookshop.dao.BookMasterDAO;
 import io.pivotal.bookshop.dao.GemFireClientCacheHelper;
 import io.pivotal.bookshop.domain.BookMaster;
 
-// TODO-07: When prompted, run this driver class to put an update into the server BookMaster region
 public class ClientInterestDriver {
 	private static Integer key = 12345;
 

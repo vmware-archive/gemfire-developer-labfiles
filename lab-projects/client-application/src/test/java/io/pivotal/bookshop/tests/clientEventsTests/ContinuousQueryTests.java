@@ -16,8 +16,6 @@ import io.pivotal.bookshop.dao.GemFireClientCacheHelper;
 import io.pivotal.bookshop.domain.BookMaster;
 import io.pivotal.bookshop.events.BookMasterCqHelper;
 
-// TODO-08: Examine the tests to determine what is happening for each test, then run to see tests fail
-// TODO-12: Run the tests to verify proper behavior
 public class ContinuousQueryTests {
 	private ClientCache clientCache;
 	private Region<Integer, BookMaster> books;

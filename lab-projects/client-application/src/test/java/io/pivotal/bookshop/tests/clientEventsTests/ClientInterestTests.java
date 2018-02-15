@@ -14,8 +14,6 @@ import io.pivotal.bookshop.dao.GemFireClientCacheHelper;
 import io.pivotal.bookshop.domain.BookMaster;
 import io.pivotal.bookshop.events.BookMasterEntryListener;
 
-// TODO-04: Examine the test suite to see the tests do, then run and note both tests fail
-// TODO-06: Run this test suite (note you'll also need to run the ClientInterestDriver class)
 public class ClientInterestTests {
 
 	private ClientCache clientCache;
@@ -31,7 +29,6 @@ public class ClientInterestTests {
 	public void setUp() throws Exception {
 		this.clientCache = GemFireClientCacheHelper.create();
 		books = clientCache.getRegion("BookMaster");
-		// TODO-05: Modify the region attributes to also include registering the new listener class
 		books.getAttributesMutator().addCacheListener(new BookMasterEntryListener());
 	}
 
