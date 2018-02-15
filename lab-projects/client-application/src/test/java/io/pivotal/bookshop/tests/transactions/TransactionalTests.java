@@ -23,7 +23,6 @@ import io.pivotal.bookshop.domain.Customer;
 import io.pivotal.bookshop.keys.OrderKey;
 import io.pivotal.bookshop.services.TransactionalService;
 
-// TODO-01: Open the test harness and observe the two transaction tests to be run
 public class TransactionalTests {
 	private ClientCache cache;
 	private Region<Integer, BookOrder> order_region;
