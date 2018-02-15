@@ -12,20 +12,20 @@ public class SummingResultCollector implements ResultCollector<Serializable, Ser
 
 	  // TODO-01: Determine how you will contain results
 	  //    HINT: You only need to keep a final sum
-	  
+	  BigDecimal total = BigDecimal.ZERO;
 
 	  @Override
 	  public void addResult(DistributedMember memberID,
 	                        Serializable resultOfSingleExecution) {
 	    // TODO-02: Implement the addResult method
 	    //    HINT: Keep in mind what was sent from the function in the prior lab.
-	   
+	    total = total.add((BigDecimal) resultOfSingleExecution);
 	  }
 
 	  @Override
 	  public void clearResults() {
 	    // TODO-03: Implement clearResults method
-	    
+	    total = BigDecimal.ZERO;
 
 	  }
 
@@ -38,7 +38,7 @@ public class SummingResultCollector implements ResultCollector<Serializable, Ser
 	  @Override
 	  public Serializable getResult() throws FunctionException {
 	    // TODO-04: Implement getResult method
-	    return null;
+	    return total.setScale(2, BigDecimal.ROUND_HALF_UP);
 	  }
 
 	  @Override
