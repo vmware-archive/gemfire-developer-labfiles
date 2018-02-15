@@ -1,17 +1,14 @@
 package io.pivotal.bookshop.domain;
 
-import java.io.Serializable;
-
-public class BookOrderItem implements Serializable
+public class BookOrderItem
 {
-	private static final long serialVersionUID = 7526471155622776147L;
 
 	private int orderLine;
 	private Integer itemNumber;
 	private int quantity;
 	private float discount;
 	
-	
+	public BookOrderItem() {}
 	
 	public BookOrderItem(int orderLine, Integer itemNumber, int quantity,
 			float discount)

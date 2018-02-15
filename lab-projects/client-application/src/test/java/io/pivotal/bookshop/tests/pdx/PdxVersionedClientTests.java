@@ -14,7 +14,6 @@ import io.pivotal.bookshop.dao.CustomerDAO;
 import io.pivotal.bookshop.dao.GemFireClientCacheHelper;
 import io.pivotal.bookshop.domain.Customer;
 
-// TODO-07: Run this test 
 public class PdxVersionedClientTests {
 	private static final int versionedCustomerKey = 9999;
 	private ClientCache clientCache;

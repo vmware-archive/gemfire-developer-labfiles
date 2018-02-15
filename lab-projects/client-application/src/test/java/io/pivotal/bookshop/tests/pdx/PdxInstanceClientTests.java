@@ -14,7 +14,6 @@ import io.pivotal.bookshop.dao.CustomerDAO;
 import io.pivotal.bookshop.dao.GemFireClientCacheHelper;
 import io.pivotal.bookshop.domain.Customer;
 
-// TODO-10: Run this test to verify correct configuration and implementation of the CustomerDAO
 public class PdxInstanceClientTests {
 	private ClientCache clientCache;
 	private Region<Integer, Customer> customers;

@@ -1,10 +1,7 @@
 package io.pivotal.bookshop.domain;
 
-import java.io.Serializable;
-
-public class InventoryItem implements Serializable
+public class InventoryItem 
 {
-	private static final long serialVersionUID = 7526471155622776147L;
 	
 	private int itemNumber;
 	private float costToXYZ;

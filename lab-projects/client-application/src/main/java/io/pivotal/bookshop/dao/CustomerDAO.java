@@ -12,11 +12,9 @@ import org.apache.geode.pdx.PdxInstance;
 import io.pivotal.bookshop.domain.Customer;
 
 public class CustomerDAO extends DAOCommon<Integer, Customer> {
-	private Region<Integer, Customer> customers;
 
 	public CustomerDAO(ClientCache clientCache) {
 		super(clientCache, "Customer");
-		this.customers = clientCache.getRegion("Customer");
 	}
 
 	/**
@@ -82,8 +80,6 @@ public class CustomerDAO extends DAOCommon<Integer, Customer> {
 	public String getCustomerName(Integer key) {
 		String customerName = null;
 		Object customerEntry = this.doGet(key);
-		// TODO-09: Write necessary code to test to see if the customerEntry is
-		// a PDX instance, extract first name and last name and create a string concatenation as specified.
 		if (customerEntry instanceof PdxInstance) {
 			StringBuilder name = new StringBuilder();
 			PdxInstance pdxCustomer = (PdxInstance) customerEntry;

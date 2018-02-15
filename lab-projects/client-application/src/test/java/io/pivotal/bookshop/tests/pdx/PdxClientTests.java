@@ -14,7 +14,6 @@ import io.pivotal.bookshop.dao.CustomerDAO;
 import io.pivotal.bookshop.dao.GemFireClientCacheHelper;
 import io.pivotal.bookshop.domain.Customer;
 
-// TODO-03: Run this set of tests to verify correct client configuration
 public class PdxClientTests {
 	private ClientCache clientCache;
 	private Region<Integer, Customer> customers;
@@ -40,7 +39,6 @@ public class PdxClientTests {
 	}
 	
 	@Test
-	// TODO-05: Change the server configuration to 1) remove the domain class jar file and 2) enable PDX Read Serialized true
 	public void testServerPdxReadSerialized() {
 		CustomerDAO dao = new CustomerDAO(clientCache);
 		List<Customer> customers = dao.findCustomersInZip("44444");
