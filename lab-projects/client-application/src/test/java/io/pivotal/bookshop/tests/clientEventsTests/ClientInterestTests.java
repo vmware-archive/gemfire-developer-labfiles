@@ -32,7 +32,7 @@ public class ClientInterestTests {
 		this.clientCache = GemFireClientCacheHelper.create();
 		books = clientCache.getRegion("BookMaster");
 		// TODO-05: Modify the region attributes to also include registering the new listener class
-		
+		books.getAttributesMutator().addCacheListener(new BookMasterEntryListener());
 	}
 
 	@After

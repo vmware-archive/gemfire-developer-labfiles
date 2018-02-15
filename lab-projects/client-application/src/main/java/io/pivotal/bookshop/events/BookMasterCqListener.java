@@ -26,6 +26,8 @@ public class BookMasterCqListener implements CqListener {
 	public void onEvent(CqEvent event) {
 		// TODO-09: Implement the functionality to capture the new value from the event as well as the key and store in the region
 		// NOTE that in some cases the newValue may be null (in the case of a delete) so make sure to test for that be for inserting
+		if (event.getNewValue() != null)
+			region.put(event.getKey(), event.getNewValue());
 
 	}
 
