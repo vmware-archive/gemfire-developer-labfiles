@@ -42,6 +42,10 @@ public class SummingFunctionTest {
 	}
 
 	@Test
+	// TODO-10: From a terminal/command shell, package files to a JAR file
+	// TODO-11: Deploy the jar file from gfsh
+	// TODO-12: Re-start the cluster
+	// TODO-13: Run the test verifying the function performs as expected
 	public void testSummingFunction() {
 		Execution execution = FunctionService.onRegion(bookOrders).withArgs("totalPrice")
 				.withCollector(new SummingResultCollector());
