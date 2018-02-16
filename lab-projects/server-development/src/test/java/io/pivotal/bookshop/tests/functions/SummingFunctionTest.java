@@ -20,7 +20,7 @@ import org.junit.Test;
 
 import io.pivotal.bookshop.domain.BookOrder;
 import io.pivotal.bookshop.domain.BookOrderItem;
-import io.pivotal.bookshop.domain.OrderKey;
+import io.pivotal.bookshop.keys.OrderKey;
 
 public class SummingFunctionTest {
 	ClientCache clientCache;
@@ -61,14 +61,14 @@ public class SummingFunctionTest {
 		OrderKey key1  = new OrderKey(5598, 17699);
 		// Order for Kari Powell for book: A Treatise of Treatises
 		BookOrder order1 = new BookOrder(17699, new Date(), (float)5.99, new Date(), new ArrayList(), 5598, (float)40.98);
-		order1.addOrderItem(new BookOrderItem (1, 123, (float)1, (float)0));
+		order1.addOrderItem(new BookOrderItem (1, 123, 1, (float)0));
 		bookOrders.put(key1, order1);
 		
 		// Order for Lula Wax   book: A Treatise of Treatises & Clifford the Big Red Dog
 		BookOrder order2 = new BookOrder(17700, new Date(), (float)5.99, new Date(), new ArrayList(), 5543, (float)52.97);
 		OrderKey key2  = new OrderKey(6024, 17700);
-		order2.addOrderItem(new BookOrderItem (1, 123, (float)1, (float)0));
-		order2.addOrderItem(new BookOrderItem(2,456, (float)1,(float)0));
+		order2.addOrderItem(new BookOrderItem (1, 123, 1, (float)0));
+		order2.addOrderItem(new BookOrderItem(2,456, 1,(float)0));
 		bookOrders.put(key2, order2);
 	}
 
