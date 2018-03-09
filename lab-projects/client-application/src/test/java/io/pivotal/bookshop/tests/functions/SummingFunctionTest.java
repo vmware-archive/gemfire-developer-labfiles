@@ -18,7 +18,6 @@ import io.pivotal.bookshop.domain.BookOrderItem;
 import io.pivotal.bookshop.function.FunctionExecutor;
 import io.pivotal.bookshop.keys.OrderKey;
 
-// TODO-08: Open and inspect this class before ultimately executing
 public class SummingFunctionTest {
 	ClientCache clientCache;
 	Region<OrderKey, BookOrder> bookOrders;
