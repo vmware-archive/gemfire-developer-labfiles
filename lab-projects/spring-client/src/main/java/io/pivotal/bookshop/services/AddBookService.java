@@ -17,7 +17,7 @@ public class AddBookService {
 	private BookMasterRepository bookRepo;
 	
 	// TODO-22: Add the Spring annotation to mark this as a transactional operation
-
+	@Transactional
 	public void addBook(BookMaster book,int inventoryQty, float costToCust) {
 		if (!bookRepo.existsById(book.getItemNumber()) ) {
 				bookRepo.save(book);

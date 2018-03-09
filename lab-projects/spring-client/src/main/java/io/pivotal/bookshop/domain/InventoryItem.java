@@ -7,10 +7,10 @@ import org.springframework.data.gemfire.mapping.annotation.ClientRegion;
 
 // TODO-10: Repeat the process of annotating the class with the correct region name and region type as well as marking the
 //          proper key field and constructor method to use for creating objects.
-
+@ClientRegion(name="InventoryItem", shortcut=ClientRegionShortcut.PROXY)
 public class InventoryItem 
 {
-
+	@Id
 	private Integer itemNumber;
 	private float costToXYZ;
 	private float priceToCustomer;
@@ -20,7 +20,7 @@ public class InventoryItem
 		
 	public InventoryItem() {}
 	
-
+	@PersistenceConstructor
 	public InventoryItem(int itemNumber, float costToXYZ,
 			float priceToCustomer, int quantityInStock, String vendor,
 			String location)
