@@ -86,6 +86,7 @@ public class GemFireClientCacheHelper {
 	 */
 	public static void enableEviction(Region region, int timeMillis) {
 		// TODO-02: Alter the specified region to set a total time to live with an action to only destroy locally
+		region.getAttributesMutator().setEntryTimeToLive(new ExpirationAttributes((timeMillis/1000), ExpirationAction.LOCAL_DESTROY));
 
 	}
 
@@ -105,7 +106,7 @@ public class GemFireClientCacheHelper {
 		ClientRegionFactory regionFactory;
 		if (createAsCachingProxy)
 			// TODO-03: Add a call to the ClientRegionFactory to enable statistics
-			regionFactory = cache.createClientRegionFactory(ClientRegionShortcut.CACHING_PROXY);
+			regionFactory = cache.createClientRegionFactory(ClientRegionShortcut.CACHING_PROXY).setStatisticsEnabled(true);
 		else
 			regionFactory = cache.createClientRegionFactory(ClientRegionShortcut.PROXY);
 
