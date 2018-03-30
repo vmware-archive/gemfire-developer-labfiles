@@ -58,6 +58,37 @@ public class GemFireClientCacheHelper {
 		return cache;
 	}
 
+	public static ClientCache createPdxEnabledCachingProxy(boolean readSerialized) {
+		// Initial configuration of the ClientCacheFactory
+		ClientCacheFactory clientFactory = new ClientCacheFactory()
+				.set("name", "Client App")
+				.addPoolLocator("localhost", 10334)
+				.setPoolSubscriptionEnabled(true);
+
+		clientFactory.setPdxSerializer(new ReflectionBasedAutoSerializer(true, "io.pivotal.bookshop.domain.*"));
+
+		clientFactory.setPdxReadSerialized(readSerialized);
+
+		ClientCache cache = clientFactory.create();
+		createProxyRegion(cache,"BookMaster", true);
+		createProxyRegion(cache,"Customer", true);
+		createProxyRegion(cache,"BookOrder", true);
+
+		return cache;
+	}
+
+	/**
+	 * Modifies the region definition to specify an expiration (passed as milliseconds) with the pesumtpion that the
+	 * configured expiration type will be Time to Live and the action will be LOCAL_DESTROY.
+	 *
+	 * @param region Region to add eviction to
+	 * @param timeMillis Total time to live for entries (in milliseconds)
+	 */
+	public static void enableEviction(Region region, int timeMillis) {
+		// TODO-02: Alter the specified region to set a total time to live with an action to only destroy locally
+
+	}
+
 	/**
 	 * Initializes a region by name and creates as either caching proxy or proxy
 	 * depending on the boolean flag supplied. Once created, it can later be
@@ -73,6 +104,7 @@ public class GemFireClientCacheHelper {
 	private static void createProxyRegion(ClientCache cache, String regionName, boolean createAsCachingProxy) {
 		ClientRegionFactory regionFactory;
 		if (createAsCachingProxy)
+			// TODO-03: Add a call to the ClientRegionFactory to enable statistics
 			regionFactory = cache.createClientRegionFactory(ClientRegionShortcut.CACHING_PROXY);
 		else
 			regionFactory = cache.createClientRegionFactory(ClientRegionShortcut.PROXY);
