@@ -20,9 +20,6 @@ import io.pivotal.bookshop.domain.InventoryItem;
 import io.pivotal.bookshop.repositories.BookMasterRepository;
 import io.pivotal.bookshop.repositories.InventoryItemRepository;
 
-// TODO-06: Open this test class and inspect the tests that are being run. Notice the testing of a basic 'Read' from the CRUD
-//          operations. Notice also a number of queries being executed on the BookMasterRepositor and InventoryItemRepository 
-//          classes.
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes=GemFireRepositoryConfig.class)
 public class SpringRepositoryTests {
@@ -40,7 +37,6 @@ public class SpringRepositoryTests {
 		populateInventory();
 	}
 	
-	// TODO-14: Run this test and verify the basic GemFire Repository configuration
 	@Test
 	public void bookTests() {
 		Optional<BookMaster> book = bookRepo.findById(123);
@@ -49,7 +45,6 @@ public class SpringRepositoryTests {
 		assertEquals("Fetched incorrect book", "Daisy Mae West",theBook.getAuthor());
 	}
 	
-    // TODO-18: Uncomment these two tests and run them
 	@Test
 	public void basicBookMasterQueryTest() {
 		List<BookMaster> results = bookRepo.findByRetailCostGreaterThan((float) 50.00);
@@ -64,8 +59,7 @@ public class SpringRepositoryTests {
 	
 	}
 
-	// TODO-20: Uncomment this test and run
-	@Test 
+	@Test
 	public void joinQueryTest() {
 		List<BookMaster> results = bookRepo.findLowStockBooks(2);
 		// Assert that only one customer item is returned

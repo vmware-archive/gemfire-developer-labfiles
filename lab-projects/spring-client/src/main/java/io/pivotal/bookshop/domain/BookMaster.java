@@ -5,12 +5,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.gemfire.mapping.annotation.ClientRegion;
 
-// TODO-07: Add the necessary annotation to mark this 
 @ClientRegion(name="BookMaster", shortcut=ClientRegionShortcut.PROXY)
 public class BookMaster 
 {
-	// TODO-08: Add the appropriate annotation to mark the 'key' field
-	// TODO-09: Add an annotation to help Spring determine which constructor to use when creating the class and populating
 	@Id
 	private Integer itemNumber;
 	private String description;

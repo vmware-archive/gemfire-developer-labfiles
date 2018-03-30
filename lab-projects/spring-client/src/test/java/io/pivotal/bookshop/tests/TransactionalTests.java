@@ -17,7 +17,6 @@ import io.pivotal.bookshop.repositories.BookMasterRepository;
 import io.pivotal.bookshop.repositories.InventoryItemRepository;
 import io.pivotal.bookshop.services.AddBookService;
 
-// TODO-21: Open this class and inspect the tests. Go ahead and run them. Do they pass?
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes=GemFireRepositoryConfig.class)
 public class TransactionalTests {

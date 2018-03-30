@@ -5,8 +5,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.gemfire.mapping.annotation.ClientRegion;
 
-// TODO-10: Repeat the process of annotating the class with the correct region name and region type as well as marking the
-//          proper key field and constructor method to use for creating objects.
 @ClientRegion(name="InventoryItem", shortcut=ClientRegionShortcut.PROXY)
 public class InventoryItem 
 {

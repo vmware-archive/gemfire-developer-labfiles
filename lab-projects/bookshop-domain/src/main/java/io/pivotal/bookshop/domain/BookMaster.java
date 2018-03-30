@@ -21,7 +21,8 @@ public class BookMaster
 		this.author = author;
 		this.title = title;
 	}
-	
+
+	public BookMaster() {}
 
 	@Override
 	public int hashCode()
