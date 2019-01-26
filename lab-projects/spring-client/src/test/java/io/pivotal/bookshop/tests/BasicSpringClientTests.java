@@ -14,9 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import io.pivotal.bookshop.config.GemFireConfiguration;
 import io.pivotal.bookshop.domain.BookMaster;
 
-// TODO-01: Open and examine the key behavior of this test harness, including the @ContextConfiguration annotation and the
-//          one test that is defined.
-// TODO-04: Run the tests. Do they pass? Why not?
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes=GemFireConfiguration.class)
 public class BasicSpringClientTests {

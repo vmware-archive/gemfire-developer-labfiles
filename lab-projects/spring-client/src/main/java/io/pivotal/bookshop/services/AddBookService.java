@@ -16,18 +16,18 @@ public class AddBookService {
 	@Autowired
 	private BookMasterRepository bookRepo;
 	
-	// TODO-22: Add the Spring annotation to mark this as a transactional operation
 	@Transactional
 	public void addBook(BookMaster book,int inventoryQty, float costToCust) {
-        if (! inventoryRepo.existsById(book.getItemNumber())) {
-            inventoryRepo.save(new InventoryItem(book.getItemNumber(),(float) 12.50, costToCust, inventoryQty, "BookRUs", "Seattle"));
-            if (!bookRepo.existsById(book.getItemNumber()) ) {
-                bookRepo.save(book);
-            } else {
-                throw new RuntimeException("Book Shouldn't exist: " + book);
-            }
-        } else {
-            throw new RuntimeException("InventoryItem Shouldn't exist for id: " + book.getItemNumber());
-            
-        }
+		if (!bookRepo.existsById(book.getItemNumber()) ) {
+				bookRepo.save(book);
+				if (! inventoryRepo.existsById(book.getItemNumber())) {
+					inventoryRepo.save(new InventoryItem(book.getItemNumber(),(float) 12.50, costToCust, inventoryQty, "BookRUs", "Seattle"));
+				} else {
+					throw new RuntimeException("InventoryItem Shouldn't exist for id: " + book.getItemNumber());
+					
+				}
+		} else {
+			throw new RuntimeException("Book Shouldn't exist: " + book);
+		}
+	}
 }

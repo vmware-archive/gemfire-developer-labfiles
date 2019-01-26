@@ -17,7 +17,7 @@ public class LoggingTransactionListener  extends TransactionListenerAdapter {
 	@Override
 	public void afterCommit(TransactionEvent event) {
 		logger.info("afterCommit: TxId= " + event.getTransactionId());
-        for (CacheEvent ce :  event.getEvents()) {
+		for (CacheEvent ce :  event.getEvents()) {
 			if (ce instanceof EntryEvent) {
 				EntryEvent ee = (EntryEvent) ce;
 				logger.info("   Entry updated for key: " + ee.getKey()
@@ -33,7 +33,7 @@ public class LoggingTransactionListener  extends TransactionListenerAdapter {
 	@Override
 	public void afterRollback(TransactionEvent event) {
 		logger.info("afterRollback: TxId= " + event.getTransactionId());
-        for (CacheEvent ce :  event.getEvents()) {
+		for (CacheEvent ce :  event.getEvents()) {
 				logger.info("   Cache event received with operation: " + ce.getOperation());
 		}
 	}
