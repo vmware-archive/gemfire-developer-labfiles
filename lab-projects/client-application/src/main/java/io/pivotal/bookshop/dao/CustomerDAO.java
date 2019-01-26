@@ -16,22 +16,22 @@ public class CustomerDAO extends DAOCommon<Integer,Customer> {
 
 	@Override
 	public void doInsert(Integer key, Customer entry) {
+		customers.create(key, entry);
 		
 	}
 
 	@Override
 	public Customer doGet(Integer key) {
-		return null;
-	}
+		return customers.get(key);	}
 
 	@Override
 	public void doUpdate(Integer key, Customer entry) {
-		
+		customers.put(key, entry);
 	}
 
 	@Override
 	public void doDelete(Integer key) {
-
+		customers.destroy(key);
 	}
 
 	
