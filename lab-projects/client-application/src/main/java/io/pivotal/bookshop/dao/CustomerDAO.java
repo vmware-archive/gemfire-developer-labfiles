@@ -1,12 +1,13 @@
 package io.pivotal.bookshop.dao;
 
-import io.pivotal.bookshop.domain.Customer;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.geode.cache.client.ClientCache;
 import org.apache.geode.cache.query.SelectResults;
 import org.apache.geode.cache.query.Struct;
 
-import java.util.ArrayList;
-import java.util.List;
+import io.pivotal.bookshop.domain.Customer;
 
 public class CustomerDAO extends DAOCommon<Integer, Customer> {
 	// Note that there is a generic region now defined in the DAOCommon class that you can use called 'region'.

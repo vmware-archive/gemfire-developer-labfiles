@@ -1,10 +1,11 @@
 package io.pivotal.bookshop.dao;
 
-import io.pivotal.bookshop.domain.BookMaster;
+import java.util.List;
+
 import org.apache.geode.cache.client.ClientCache;
 import org.apache.geode.cache.query.SelectResults;
 
-import java.util.List;
+import io.pivotal.bookshop.domain.BookMaster;
 
 public class BookMasterDAO extends DAOCommon<Integer, BookMaster> {
 	// Note that there is a generic region now defined in the DAOCommon class that you can use called 'region'.

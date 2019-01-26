@@ -25,7 +25,6 @@ public class CustomerPartitionResolver implements PartitionResolver<OrderKey,Obj
 	@Override
 	public Serializable getRoutingObject(EntryOperation<OrderKey,Object> eo)
 	{
-		// TODO-02: Implement getRoutingObject to obtain the customerId portion of the key and return it
 	    OrderKey key =  eo.getKey();
 		return key.getCustomerNumber();
 	}

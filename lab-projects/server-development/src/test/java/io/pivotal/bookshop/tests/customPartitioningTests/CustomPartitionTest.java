@@ -24,7 +24,6 @@ import io.pivotal.bookshop.domain.BookOrderItem;
 import io.pivotal.bookshop.domain.Customer;
 import io.pivotal.bookshop.keys.OrderKey;
 
-// TODO-03: Run this test to verify correct implementation and deployment of the CustomerParitionResolver
 public class CustomPartitionTest {
 
 	private ClientCache cache;
