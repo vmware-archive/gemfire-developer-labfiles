@@ -2,9 +2,8 @@ package io.pivotal.bookshop.domain;
 
 import java.io.Serializable;
 
-public class Address implements Serializable
+public class Address 
 {
-	private static final long serialVersionUID = 7526471155622776147L;
 	
 	private String addressLine1;
 	private String addressLine2;
@@ -16,6 +15,7 @@ public class Address implements Serializable
 	private String phoneNumber;
 	private String addressTag;
 		
+	public Address() {}
 	public Address(String postalCode)
 	{
 		this.postalCode = postalCode; 

@@ -5,9 +5,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 //TODO-01: Ensure that neither this class, nor the Address class implements java.io.Serializable
-public class Customer implements Serializable
+public class Customer 
 {
-	private static final long serialVersionUID = 7526471155622776147L;
 
 	  
 	private Integer customerNumber;
@@ -16,6 +15,7 @@ public class Customer implements Serializable
 	
 	private String lastName;
 	// TODO-06: Add field as String telephoneNumber and update the corresponding setter/getter 
+	private String telephoneNumber;
 	
 	private Address primaryAddress;
 
@@ -23,14 +23,14 @@ public class Customer implements Serializable
 	
 	// TODO-04: Add a public no-argument constructor for this and the Address
 		// class
+	public Customer() {}
 	
 	public void setTelephoneNumber(String telephoneNumber) {
-		
-
+		this.telephoneNumber = telephoneNumber;	
 	}
 
 	public String getTelephoneNumber() {
-		return null;
+		return this.telephoneNumber;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

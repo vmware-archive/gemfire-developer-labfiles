@@ -6,10 +6,6 @@ import org.apache.geode.cache.client.ClientRegionFactory;
 import org.apache.geode.cache.client.ClientRegionShortcut;
 import org.apache.geode.pdx.ReflectionBasedAutoSerializer;
 
-import io.pivotal.bookshop.domain.BookMaster;
-import io.pivotal.bookshop.domain.Customer;
-import io.pivotal.bookshop.keys.OrderKey;
-
 public class GemFireClientCacheHelper {
 
 	/**
@@ -52,9 +48,10 @@ public class GemFireClientCacheHelper {
 
 		// TODO-02: Add configuration to enable auto-serialization on
 		// the client side (and enforce check portability)
+		clientFactory.setPdxSerializer(new ReflectionBasedAutoSerializer(true, "io.pivotal.bookshop.domain.*"));
 		
 		// TODO-08: Set read-serialized to true
-
+		clientFactory.setPdxReadSerialized(readSerialized);
 		
 		ClientCache cache = clientFactory.create();
 		createProxyRegion(cache,"BookMaster", false);
