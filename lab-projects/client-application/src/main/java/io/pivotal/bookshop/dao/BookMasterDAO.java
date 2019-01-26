@@ -1,11 +1,10 @@
 package io.pivotal.bookshop.dao;
 
-import java.util.List;
-
+import io.pivotal.bookshop.domain.BookMaster;
 import org.apache.geode.cache.client.ClientCache;
 import org.apache.geode.cache.query.SelectResults;
 
-import io.pivotal.bookshop.domain.BookMaster;
+import java.util.List;
 
 public class BookMasterDAO extends DAOCommon<Integer, BookMaster> {
 	// Note that there is a generic region now defined in the DAOCommon class that you can use called 'region'.
@@ -24,8 +23,9 @@ public class BookMasterDAO extends DAOCommon<Integer, BookMaster> {
 	public List<BookMaster> findLowQuantityBooks() {
 		// TODO-06: Implement a join query to only select books from BookMaster
 		// where the associated InventoryItem quantityInStock is below 2
-		String queryString1 = "";
-		return null;
+		String queryString1 = "select  b " + "from /BookMaster b, /InventoryItem i "
+				+ "where b.itemNumber = i.itemNumber and  i.quantityInStock < 2";
+		return ((SelectResults<BookMaster>) doQuery(queryString1)).asList();
 	}
 
 }
