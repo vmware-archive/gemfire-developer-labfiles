@@ -3,6 +3,7 @@ package io.pivotal.bookshop.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.geode.cache.Region;
 import org.apache.geode.cache.client.ClientCache;
 import org.apache.geode.cache.query.SelectResults;
 import org.apache.geode.cache.query.Struct;
