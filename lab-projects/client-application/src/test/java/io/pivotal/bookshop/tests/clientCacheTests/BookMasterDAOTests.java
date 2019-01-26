@@ -4,9 +4,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.util.List;
+
 import org.apache.geode.cache.EntryExistsException;
 import org.apache.geode.cache.Region;
 import org.apache.geode.cache.client.ClientCache;
+import org.apache.geode.cache.client.ClientRegionFactory;
+import org.apache.geode.cache.client.ClientRegionShortcut;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,11 +18,13 @@ import org.junit.Test;
 import io.pivotal.bookshop.dao.BookMasterDAO;
 import io.pivotal.bookshop.dao.GemFireClientCacheHelper;
 import io.pivotal.bookshop.domain.BookMaster;
+import io.pivotal.bookshop.domain.InventoryItem;
 
-// TODO-10: When you have completed implementing the BookMasterDAO functionality, run this JUnit test to validate correct implementation
+// TODO-07: When you have completed implementing the doJoinQuery() in the BookMasterDAO, run this JUnit test to validate correct implementation
 public class BookMasterDAOTests {
 	private ClientCache clientCache;
 	private Region<Integer, BookMaster> books;
+	private Region <Integer, InventoryItem> inventory;
 	private static Integer key = 12345;
 
 	/**
@@ -29,9 +35,14 @@ public class BookMasterDAOTests {
 	@Before
 	public void setUp() throws Exception {
 		this.clientCache = GemFireClientCacheHelper.create();
-		this.clientCache.setCopyOnRead(true);
+		clientCache.setCopyOnRead(true);
 		books = clientCache.getRegion("BookMaster");
-		
+		books.removeAll(books.keySetOnServer());
+		populateBooks();
+		ClientRegionFactory<Integer, InventoryItem> inventoryRegionFactory = clientCache.createClientRegionFactory(ClientRegionShortcut.PROXY);
+		inventory = inventoryRegionFactory.create("InventoryItem");
+		inventory.removeAll(inventory.keySetOnServer());
+		populateInventory();
 	}
 
 	@After
@@ -92,6 +103,16 @@ public class BookMasterDAOTests {
 
 	}
 
+	@Test
+	public void testJoinQuery() {
+		BookMasterDAO dao = new BookMasterDAO(clientCache);
+		List<BookMaster> results = dao.findLowQuantityBooks();
+		// Assert that only one customer item is returned
+		assertEquals("Join query should return only one Book",1, results.size());
+		// Assert that the customer returned has last name = 'Wax'
+		assertEquals("Join query should have returned Book with author 'Clarence Meeks'","Clarence Meeks",results.get(0).getAuthor());
+
+	}
 
 	/**
 	 * Verify entry with given key matches the book object passed in
@@ -120,5 +141,28 @@ public class BookMasterDAOTests {
 		books.put(key, book);
 
 	}
+	
+	private void populateBooks() {
+		BookMaster book = new BookMaster(123, "Run on sentences and drivel on all things mundane",
+				(float) 34.99, 2011, "Daisy Mae West", "A Treatise of Treatises");
+		books.put(123, book);
+		BookMaster book2 = new BookMaster(456, "A book about a dog",
+				(float) 11.99, 1971, "Clarence Meeks", "Clifford the Big Red Dog");
+		books.put(456, book2);
+		BookMaster book3 = new BookMaster(789, "Theoretical information about the structure of Operating Systems",
+				(float) 59.99, 2011, "Jim Heavisides", "Operating Systems: An Introduction");
+		books.put(789, book3);
+	
+	}
 
+	private void populateInventory() {
+
+		InventoryItem item1 = new InventoryItem(123, (float) 12.50, (float) 34.99,  12, "BookRUs", "Seattle");
+		inventory.put(123, item1);
+
+		InventoryItem item2 = new InventoryItem(456, (float) 12.50, (float) 11.99, 1, "BookRUs", "Seattle");
+		inventory.put(456, item2);
+
+	
+	}
 }

@@ -12,8 +12,6 @@ import io.pivotal.bookshop.dao.GemFireClientCacheHelper;
 import io.pivotal.bookshop.domain.BookMaster;
 import io.pivotal.bookshop.domain.Customer;
 
-// TODO-04: Run the test suite and verify the test passes
-// TODO-05: Open the gemfire.properties file and modify the log-level
 public class ClientCacheTests {
 
 	private Region<Integer, BookMaster> books;

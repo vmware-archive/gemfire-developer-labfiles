@@ -1,48 +1,31 @@
 package io.pivotal.bookshop.dao;
 
-import org.apache.geode.cache.Region;
+import java.util.List;
+
 import org.apache.geode.cache.client.ClientCache;
+import org.apache.geode.cache.query.SelectResults;
 
 import io.pivotal.bookshop.domain.BookMaster;
 
-public class BookMasterDAO extends DAOCommon<Integer,BookMaster>
-{
-		// The region object that stores BookMaster objects
-		private Region<Integer, BookMaster> books;
+public class BookMasterDAO extends DAOCommon<Integer, BookMaster> {
+	// Note that there is a generic region now defined in the DAOCommon class that you can use called 'region'.
+	// Notice also that type type (key and value) are defined by the types specified above
 
-		public BookMasterDAO(ClientCache cache) {
-			super(cache);
-			this.books = cache.getRegion("BookMaster");
-		}
-		
-		@Override
-		public void doInsert(Integer key, BookMaster book) {
-			// TODO-06: Write code to insert book with the given key. Use the method that assumes
-            //          the entry doesn't already exist
-			books.create(key, book);
-					
-		}
-		
-		@Override
-		public BookMaster doGet(Integer key)
-		{
-			// TODO-07: Write code to get & return a book for the specified key
-			return books.get(key);
-		}
-		
-		@Override
-		public void doUpdate(Integer key, BookMaster book) {
-	    	// TODO-08: Write code to update book for specified key
-	    	books.put(key, book);
-	    }
+	public BookMasterDAO(ClientCache cache) {
+		super(cache, "BookMaster");
+	}
 
-		@Override
-		public void doDelete(Integer key) 
-	    {
-	        // TODO-09: Implement delete functionality for specified key
-	    	books.remove(key);
-	    }
-
-		
+	/**
+	 * Perform a equi-join query that will identify books in BookMaster region having an inventory
+	 * balance of < 2 items using InventoryItem objects.
+	 * 
+	 * @return List of BookMaster having quantityInStock < 2
+	 */
+	public List<BookMaster> findLowQuantityBooks() {
+		// TODO-06: Implement a join query to only select books from BookMaster
+		// where the associated InventoryItem quantityInStock is below 2
+		String queryString1 = "";
+		return null;
+	}
 
 }
