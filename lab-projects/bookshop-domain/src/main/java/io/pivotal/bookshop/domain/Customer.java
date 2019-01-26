@@ -4,6 +4,7 @@ package io.pivotal.bookshop.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+//TODO-01: Ensure that neither this class, nor the Address class implements java.io.Serializable
 public class Customer implements Serializable
 {
 	private static final long serialVersionUID = 7526471155622776147L;
@@ -14,12 +15,24 @@ public class Customer implements Serializable
 	private String firstName;
 	
 	private String lastName;
+	// TODO-06: Add field as String telephoneNumber and update the corresponding setter/getter 
 	
 	private Address primaryAddress;
 
 	private ArrayList <Integer> myBookOrders;
 	
+	// TODO-04: Add a public no-argument constructor for this and the Address
+		// class
 	
+	public void setTelephoneNumber(String telephoneNumber) {
+		
+
+	}
+
+	public String getTelephoneNumber() {
+		return null;
+	}
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Customer (int customerNumber, String firstName, String lastName)
 	{

@@ -7,15 +7,16 @@ import org.apache.geode.cache.Region;
 import org.apache.geode.cache.client.ClientCache;
 import org.apache.geode.cache.query.SelectResults;
 import org.apache.geode.cache.query.Struct;
+import org.apache.geode.pdx.PdxInstance;
 
 import io.pivotal.bookshop.domain.Customer;
 
 public class CustomerDAO extends DAOCommon<Integer, Customer> {
-	// Note that there is a generic region now defined in the DAOCommon class that you can use called 'region'.
-	// Notice also that type type (key and value) are defined by the types specified above
+	private Region<Integer, Customer> customers;
 
 	public CustomerDAO(ClientCache clientCache) {
 		super(clientCache, "Customer");
+		this.customers = clientCache.getRegion("Customer");
 	}
 
 	/**
@@ -29,9 +30,11 @@ public class CustomerDAO extends DAOCommon<Integer, Customer> {
 	}
 
 	/**
-	 * Executes a Projection List query having only the customerNumber, firstName and lastName fields
+	 * Executes a Projection List query having only the customerNumber,
+	 * firstName and lastName fields
 	 * 
-	 * @return A list of all Customer entries with only the customerNumber, firstName and lastName fields set
+	 * @return A list of all Customer entries with only the customerNumber,
+	 *         firstName and lastName fields set
 	 */
 	public List<Customer> getAllSummary() {
 		List<Customer> custList = new ArrayList<Customer>();
@@ -42,15 +45,19 @@ public class CustomerDAO extends DAOCommon<Integer, Customer> {
 					(String) s.get("lastName"));
 			custList.add(c);
 		}
-		
 		return custList;
 
 	}
 
+	public List<Customer> findCustomersInZip(String zip) {
+		String queryString1 = "SELECT * FROM /Customer where primaryAddress.postalCode = '" + zip + "'";
+		return ((SelectResults<Customer>) doQuery(queryString1)).asList();
+
+	}
+
 	/**
-	 * Constructs an equi-join query string that returns Customers where the associated BookOrder has a
-	 * totalPrice > $45.00. This is a demo query that is designed to fail due to the fact that both regions
-	 * are partitioned regions.
+	 * Constructs an equi-join query string that returns Customers where the
+	 * associated BookOrder has a totalPrice > $45.00
 	 * 
 	 * @return List of Customer entries having associated BookOrder > $45.00
 	 */
@@ -58,6 +65,27 @@ public class CustomerDAO extends DAOCommon<Integer, Customer> {
 		String queryString1 = "select distinct c " + "from /Customer c, /BookOrder o "
 				+ "where c.customerNumber = o.customerNumber and  o.totalPrice > 45.00";
 		return ((SelectResults<Customer>) doQuery(queryString1)).asList();
-	}	
+	}
 
+	/**
+	 * Produces a string representation of the customer in the form 'lastName,
+	 * firstName'. This uses PdxInstance so if for some reason the PdxInstance
+	 * is not returned, it's likely because the client wasn't configures with
+	 * readSerialized set to true.
+	 * 
+	 * @param key
+	 *            Key for customer to fetch
+	 * @return String that is the concatenation of last name and first name as
+	 *         'lastName, firstName' or null if object is either not in the
+	 *         cache or is not a PdxInstance
+	 */
+	public String getCustomerName(Integer key) {
+		String customerName = null;
+		Object customerEntry = this.doGet(key);
+		// TODO-09: Write necessary code to test to see if the customerEntry is
+		// a PDX instance, extract first name and last name and create a string concatenation as specified.
+		
+		
+		return customerName;
+	}
 }
