@@ -16,6 +16,7 @@ import org.apache.geode.cache.client.ClientRegionFactory;
 import org.apache.geode.cache.client.ClientRegionShortcut;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import io.pivotal.bookshop.dao.CustomerDAO;
@@ -108,7 +109,6 @@ public class CustomerDAOTests {
 	}
 
 	@Test
-	// TODO-03: Run this test to verify the correct implementation of the 'getAll()' method
 	public void testGetAll() {
 		CustomerDAO dao = new CustomerDAO(clientCache);
 		List<Customer> results = dao.getAll();
@@ -126,7 +126,6 @@ public class CustomerDAOTests {
 	}
 	
 	@Test 
-	// TODO-05: Run this test to verify the correct implementation of the 'getAllSummary()'
 	public void testSummaryGetAll() {
 		CustomerDAO dao = new CustomerDAO(clientCache);
 		List<Customer> results = dao.getAllSummary();
@@ -141,6 +140,16 @@ public class CustomerDAOTests {
 		}
 		if (! found) 
 			fail("No entry found for Customer First Name = 'Lula'");
+	}
+	
+	@Test @Ignore
+	// This will be a demo query that is expected to fail. Demo this ahead of the PartitionedRegion presentation
+	// (maybe right after the Query lab)
+	public void testJoinQueryOnPartitionedRegion() {
+		CustomerDAO dao = new CustomerDAO(clientCache);
+		List<Customer> results = dao.findHighPricedCustomerOrders();
+		assertEquals("Should only have one result", 1, results.size());
+		
 	}
 	
 	/**

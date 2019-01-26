@@ -40,8 +40,6 @@ public abstract class DAOCommon<K,T> {
      * @return SelectResults is a collection of any number of types depending on the nature of the query
      */
 	public SelectResults<?> doQuery(String queryString) {
-		// TODO-01: Implement the doQuery method to use the supplied query string to execute, returning the SelectResults
-		// Catch any exceptions and re-throw as a QueryUncheckedException, which is an unchecked exception provided in this package.
 		QueryService qs = clientCache.getQueryService();
 
 		Query q = qs.newQuery(queryString);

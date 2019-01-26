@@ -20,7 +20,6 @@ import io.pivotal.bookshop.dao.GemFireClientCacheHelper;
 import io.pivotal.bookshop.domain.BookMaster;
 import io.pivotal.bookshop.domain.InventoryItem;
 
-// TODO-07: When you have completed implementing the doJoinQuery() in the BookMasterDAO, run this JUnit test to validate correct implementation
 public class BookMasterDAOTests {
 	private ClientCache clientCache;
 	private Region<Integer, BookMaster> books;

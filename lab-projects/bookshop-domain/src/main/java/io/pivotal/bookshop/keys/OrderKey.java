@@ -2,6 +2,7 @@ package io.pivotal.bookshop.keys;
 
 import java.io.Serializable;
 
+//TODO-01a: Open this key class and observe the components of the key. 
 public class OrderKey implements Serializable	
 {
 	private static final long serialVersionUID = 1L;
@@ -32,7 +33,9 @@ public class OrderKey implements Serializable
 		this.orderNumber = orderNumber;
 	}
 
-	@Override
+	// TODO-01b: Notice the implementation of hashCode() and equals(). The customerId attribute is only used for partitioning while
+	//           the orderNumber is used for equality and hashCode.
+    @Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
