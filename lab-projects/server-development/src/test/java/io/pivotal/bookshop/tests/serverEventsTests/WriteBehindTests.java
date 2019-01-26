@@ -19,7 +19,7 @@ import io.pivotal.bookshop.domain.BookMaster;
 import io.pivotal.bookshop.events.JdbcBookDAO;
 
 public class WriteBehindTests {
-	static Integer sleepMillis = 2000;
+	static Integer sleepMillis = 1000;
 	ClientCache clientCache;
 	Region<Integer, BookMaster> books;
 	JdbcBookDAO dao = new JdbcBookDAO();

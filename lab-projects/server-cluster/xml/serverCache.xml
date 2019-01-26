@@ -6,6 +6,10 @@
     version="1.0">
 
    <!-- TODO-08: Add configuration for the LoggingTransactionListener -->
-
+  <cache-transaction-manager>
+    <transaction-listener>
+      <class-name>io.pivotal.bookshop.events.LoggingTransactionListener</class-name>
+    </transaction-listener>
+  </cache-transaction-manager>
 
 </cache>
