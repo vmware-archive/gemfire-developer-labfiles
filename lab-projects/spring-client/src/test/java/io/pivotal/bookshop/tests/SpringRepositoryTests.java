@@ -50,30 +50,30 @@ public class SpringRepositoryTests {
 	}
 	
     // TODO-18: Uncomment these two tests and run them
-//	@Test
-//	public void basicBookMasterQueryTest() {
-//		List<BookMaster> results = bookRepo.findByRetailCostGreaterThan((float) 50.00);
-//		assertEquals("Query should return only one book", 1, results.size());
-//		assertEquals("Join query should have return book with author 'Jim Heavisides'", "Jim Heavisides", results.get(0).getAuthor());
-//	}
-//	
-//	@Test 
-//	public void basicInventoryItemQueryTest() {
-//		List<InventoryItem> results = inventoryRepo.findByQuantityInStockLessThan(2);
-//		assertEquals("Query should return only one Item",1, results.size());
-//	
-//	}
+	@Test
+	public void basicBookMasterQueryTest() {
+		List<BookMaster> results = bookRepo.findByRetailCostGreaterThan((float) 50.00);
+		assertEquals("Query should return only one book", 1, results.size());
+		assertEquals("Join query should have return book with author 'Jim Heavisides'", "Jim Heavisides", results.get(0).getAuthor());
+	}
+	
+	@Test 
+	public void basicInventoryItemQueryTest() {
+		List<InventoryItem> results = inventoryRepo.findByQuantityInStockLessThan(2);
+		assertEquals("Query should return only one Item",1, results.size());
+	
+	}
 
 	// TODO-20: Uncomment this test and run
-//	@Test 
-//	public void joinQueryTest() {
-//		List<BookMaster> results = bookRepo.findLowStockBooks(2);
-//		// Assert that only one customer item is returned
-//		assertEquals("Join query should return only one Book",1, results.size());
-//		// Assert that the customer returned has last name = 'Wax'
-//		assertEquals("Join query should have returned Book with author 'Clarence Meeks'","Clarence Meeks",results.get(0).getAuthor());
-//	
-//	}
+	@Test 
+	public void joinQueryTest() {
+		List<BookMaster> results = bookRepo.findLowStockBooks(2);
+		// Assert that only one customer item is returned
+		assertEquals("Join query should return only one Book",1, results.size());
+		// Assert that the customer returned has last name = 'Wax'
+		assertEquals("Join query should have returned Book with author 'Clarence Meeks'","Clarence Meeks",results.get(0).getAuthor());
+	
+	}
 
 	private void populateBooks() {
 		BookMaster book = new BookMaster(123, "Run on sentences and drivel on all things mundane",

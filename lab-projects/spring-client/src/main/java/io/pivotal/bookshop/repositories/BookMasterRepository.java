@@ -12,12 +12,13 @@ import io.pivotal.bookshop.domain.BookMaster;
 public interface BookMasterRepository extends CrudRepository<BookMaster, Integer>{
 	// TODO-15: Add a 'findBy' method that returns all BookMaster entries having a retailCost of more than the value passed in.
 	//          HINT: You might have a look at the unit test (SpringRepositoryTests) to see how the method is used.
-
+	List<BookMaster> findByRetailCostGreaterThan(float f);
 
 	// TODO-19: Add a method called findLowStockBooks that returns a list of BookMaster entries and takes a single
 	//          argument as an integer for the inventory in stock threshold. Also add the necessary @Query annotation
 	//          to tell Spring GemFire how to perform the query
 	//          HINT: You can use the initial query used in the query lab but now you can parameterize the comparison value
-
+	@Query("select b from  /BookMaster b, /InventoryItem i where b.itemNumber = i.itemNumber and  i.quantityInStock < $1")
+	List<BookMaster> findLowStockBooks(Integer stockThreshold);
 	
 }
