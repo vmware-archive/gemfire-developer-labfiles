@@ -46,11 +46,8 @@ public class GemFireClientCacheHelper {
 				.addPoolLocator("localhost", 10334)
 				.setPoolSubscriptionEnabled(true);
 
-		// TODO-02: Add configuration to enable auto-serialization on
-		// the client side (and enforce check portability)
 		clientFactory.setPdxSerializer(new ReflectionBasedAutoSerializer(true, "io.pivotal.bookshop.domain.*"));
 		
-		// TODO-08: Set read-serialized to true
 		clientFactory.setPdxReadSerialized(readSerialized);
 		
 		ClientCache cache = clientFactory.create();

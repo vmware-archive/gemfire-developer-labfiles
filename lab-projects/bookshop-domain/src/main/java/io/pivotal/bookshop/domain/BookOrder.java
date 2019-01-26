@@ -1,12 +1,10 @@
 package io.pivotal.bookshop.domain;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class BookOrder implements Serializable
+public class BookOrder 
 {
-	private static final long serialVersionUID = 7526471155622776147L;
 
 	private Integer orderNumber;
 	private Date orderDate;
@@ -18,9 +16,7 @@ public class BookOrder implements Serializable
 	
 	
 	
-
-
-
+	public BookOrder() {}
 
 	public BookOrder(Integer orderNumber, Date orderDate, float shippingCost,
 			Date shipDate, ArrayList<BookOrderItem> orderItems, Integer customerNumber,

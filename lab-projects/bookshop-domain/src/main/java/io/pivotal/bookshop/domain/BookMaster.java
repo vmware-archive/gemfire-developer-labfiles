@@ -1,10 +1,7 @@
 package io.pivotal.bookshop.domain;
 
-import java.io.Serializable;
-
-public class BookMaster implements Serializable
+public class BookMaster 
 {
-	private static final long serialVersionUID = 7526471155622776147L;
 	
 	private int itemNumber;
 	private String description;

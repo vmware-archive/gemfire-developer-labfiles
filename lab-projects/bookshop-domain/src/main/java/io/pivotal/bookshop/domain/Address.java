@@ -1,7 +1,5 @@
 package io.pivotal.bookshop.domain;
 
-import java.io.Serializable;
-
 public class Address 
 {
 	

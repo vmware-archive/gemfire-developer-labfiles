@@ -1,10 +1,8 @@
 package io.pivotal.bookshop.domain;
 
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-//TODO-01: Ensure that neither this class, nor the Address class implements java.io.Serializable
 public class Customer 
 {
 
@@ -14,15 +12,13 @@ public class Customer
 	private String firstName;
 	
 	private String lastName;
-	// TODO-06: Add field as String telephoneNumber and update the corresponding setter/getter 
+
 	private String telephoneNumber;
 	
 	private Address primaryAddress;
 
 	private ArrayList <Integer> myBookOrders;
 	
-	// TODO-04: Add a public no-argument constructor for this and the Address
-		// class
 	public Customer() {}
 	
 	public void setTelephoneNumber(String telephoneNumber) {
