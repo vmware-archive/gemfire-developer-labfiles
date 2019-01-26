@@ -8,48 +8,40 @@ import java.util.Date;
 
 import org.apache.geode.cache.Region;
 import org.apache.geode.cache.client.ClientCache;
-import org.apache.geode.cache.client.ClientCacheFactory;
-import org.apache.geode.cache.client.ClientRegionFactory;
-import org.apache.geode.cache.client.ClientRegionShortcut;
-import org.apache.geode.cache.execute.Execution;
-import org.apache.geode.cache.execute.FunctionService;
-import org.apache.geode.cache.execute.ResultCollector;
-import org.apache.geode.pdx.ReflectionBasedAutoSerializer;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import io.pivotal.bookshop.dao.GemFireClientCacheHelper;
 import io.pivotal.bookshop.domain.BookOrder;
 import io.pivotal.bookshop.domain.BookOrderItem;
+import io.pivotal.bookshop.function.FunctionExecutor;
 import io.pivotal.bookshop.keys.OrderKey;
 
+// TODO-08: Open and inspect this class before ultimately executing
 public class SummingFunctionTest {
 	ClientCache clientCache;
 	Region<OrderKey, BookOrder> bookOrders;
 
 	@Before
 	public void initCache() {
-		this.clientCache = new ClientCacheFactory().set("name", "DataOperations Client")
-				.addPoolLocator("localhost", 10334)
-				.setPdxSerializer(new ReflectionBasedAutoSerializer(true, "io.pivotal.bookshop.domain.*"))
-				.create();
+		this.clientCache = GemFireClientCacheHelper.createPdxEnabled(false);
 
-		ClientRegionFactory<OrderKey, BookOrder> regionFactory = this.clientCache
-				.createClientRegionFactory(ClientRegionShortcut.PROXY);
-		bookOrders = regionFactory.create("BookOrder");
+		bookOrders = clientCache.getRegion("BookOrder");
 
 		bookOrders.removeAll(bookOrders.keySetOnServer());
 		populateBookOrders();
 	}
+	
+	@After
+	public void cleanup() {
+		clientCache.close();
+	}
 
 	@Test
 	public void testSummingFunction() {
-		Execution execution = FunctionService.onRegion(bookOrders).withArgs("totalPrice")
-				.withCollector(new SummingResultCollector());
-
-		ResultCollector rc = execution.execute("GenericSumFunction");
-
-		BigDecimal result = (BigDecimal) rc.getResult();
-		assertEquals(new BigDecimal("93.95"), result); // 40.98 + 52.97
+		
+		assertEquals("Possible incorrect implementation of the ResultCollector - ",new BigDecimal("93.95"), FunctionExecutor.callSumFunction(bookOrders,"totalPrice")); // 40.98 + 52.97
 	}
 	
 	private void populateBookOrders()
